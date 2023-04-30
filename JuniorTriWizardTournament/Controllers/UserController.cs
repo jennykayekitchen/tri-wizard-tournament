@@ -79,7 +79,6 @@ namespace JuniorTriWizardTournament.Controllers
 
         }
 
-
         private User GetCurrentUser()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
