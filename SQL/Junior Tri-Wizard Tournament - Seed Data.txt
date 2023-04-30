@@ -1,0 +1,53 @@
+INSERT INTO [Schools] ([Name], [TotalPoints])
+VALUES
+('Hogwarts School of Witchcraft and Wizardry', 0),
+('Beauxbatons Academy of Magic', 0),
+('The Durmstrang Institute', 0);
+
+INSERT INTO [Users] ([FirebaseUserId], [FirstName], [LastName], [EmailAddress], [SchoolId], [AboutMe], [TotalPoints])
+VALUES
+('user1', 'Ginny', 'Weasley', 'jennykayekitchen@gmail.com', 1, 'I love herbology!', 0),
+('user2', 'Gabrielle', 'Delacour', 'gabrielledelacour@example.com', 2, 'Words are my passion!', 0),
+('user3', 'Stefan', 'Krum', 'stefankrum@example.com', 3, 'I want to expand my vocabulary!', 0),
+('user4', 'Ron', 'Weasley', 'ronweasley@example.com', 1, 'I want to improve my English skills!', 0);
+
+INSERT INTO [Categories] ([Name])
+VALUES
+('Magical Beasts'),
+('Places'),
+('Potions, Spells, and Plants'),
+('Events');
+
+INSERT INTO [Words] ([Name], [CategoryId])
+VALUES
+('Basilisk', 1),
+('Hippogriff', 1),
+('Chamber of Secrets', 2),
+('Gringotts', 2),
+('Apparition', 3),
+('Floo Powder', 3),
+('Yule Ball', 4),
+('Death Day Party', 4);
+
+INSERT INTO [Games] ([TotalPoints], [UserId])
+VALUES
+(10, 1), 
+(20, 2), 
+(15, 3), 
+(30, 4);
+
+INSERT INTO [Subjects] ([Name])
+VALUES
+('Herbology'),
+('Transfiguration'),
+('History of Magic'),
+('Study of Ancient Runes');
+
+INSERT INTO [FavoriteSubjects] ([UserId], [SubjectId])
+VALUES
+(1, 1),
+(1, 3),
+(2, 2),
+(3, 4),
+(4, 1),
+(4, 3);
