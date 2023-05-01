@@ -32,6 +32,7 @@ namespace JuniorTriWizardTournament
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ISchoolRepository, SchoolRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ISubjectRepository, SubjectRepository>();
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services
