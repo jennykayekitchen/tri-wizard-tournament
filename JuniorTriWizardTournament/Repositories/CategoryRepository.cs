@@ -1,4 +1,5 @@
-﻿using JuniorTriWizardTournament.Models;
+﻿using Azure;
+using JuniorTriWizardTournament.Models;
 using JuniorTriWizardTournament.Utils;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -69,5 +70,7 @@ namespace JuniorTriWizardTournament.Repositories
                 }
             }
         }
+
+        
     }
 }
