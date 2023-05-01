@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace JuniorTriWizardTournament.Repositories
 {
-    public class SubjectRepository : BaseRepository, ISubjectRepository
+    public class WordRepository : BaseRepository, IWordRepository
     {
-        public SubjectRepository(IConfiguration configuration) : base(configuration) { }
+        public WordRepository(IConfiguration configuration) : base(configuration) { }
 
-        public Subject GetById(int id)
+        public Word GetById(int id)
         {
             using (var conn = Connection)
             {
@@ -19,17 +19,17 @@ namespace JuniorTriWizardTournament.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT Id, Name                              
-                        FROM Subjects                                
+                        FROM Words                                
                         WHERE Id = @id";
 
                     DbUtils.AddParameter(cmd, "@id", id);
 
-                    Subject subject = null;
+                    Word word = null;
 
                     var reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        subject = new Subject()
+                        word = new Word()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Name = DbUtils.GetString(reader, "Name"),
@@ -37,12 +37,12 @@ namespace JuniorTriWizardTournament.Repositories
                     }
                     reader.Close();
 
-                    return subject;
+                    return word;
                 }
             }
         }
 
-        public List<Subject> GetSubjects()
+        public List<Word> GetWords()
         {
             using (SqlConnection conn = Connection)
             {
@@ -50,25 +50,24 @@ namespace JuniorTriWizardTournament.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT Id, Name                               
-                                        FROM Subjects                                        
+                                        FROM Words                                        
                                         ORDER BY Name";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var subjects = new List<Subject>();
+                        var words = new List<Word>();
                         while (reader.Read())
                         {
-                            subjects.Add(new Subject()
+                            words.Add(new Word()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name"),
                             });
                         }
-                        return subjects;
+                        return words;
                     }
                 }
             }
         }
     }
 }
-
