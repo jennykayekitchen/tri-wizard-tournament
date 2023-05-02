@@ -3,13 +3,14 @@ using JuniorTriWizardTournament.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace JuniorTriWizardTournament.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -83,6 +84,30 @@ namespace JuniorTriWizardTournament.Controllers
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        [HttpGet("favoritesubject/{id}")]
+        public IActionResult GetFavoriteSubjectByFavoriteSubjectId(int id)
+        {
+            var favoriteSubject = _userRepository.GetFavoriteSubjectByFavoriteSubjectId(id);
+            if (favoriteSubject == null)
+            {
+                return NotFound();
+            }
+            return Ok(favoriteSubject);
+        }
+
+        [HttpGet("favoritesubjects")]
+        public IActionResult GetFavoriteSubjects()
+        {
+            return Ok(_userRepository.GetFavoriteSubjects());
+        }
+
+        [HttpGet("{id}/favoritesubjects")]
+        public IActionResult GetFavoriteSubjectsByUserId(int id)
+        {
+            List<FavoriteSubject> favoriteSubjects = _userRepository.GetFavoriteSubjectsByUserId(id);
+            return Ok(favoriteSubjects);
         }
     }
 }

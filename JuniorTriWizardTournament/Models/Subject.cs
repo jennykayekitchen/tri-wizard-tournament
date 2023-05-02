@@ -9,6 +9,7 @@ namespace JuniorTriWizardTournament.Models
 
         [Required]
         public string Name { get; set; }
+        
     }
 }
 

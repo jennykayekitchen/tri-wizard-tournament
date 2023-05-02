@@ -6,8 +6,11 @@ import { register } from "../modules/authManager";
 export default function Register() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
+  const [school, setSchool] = useState();
+  const [schools, setSchools] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
@@ -16,7 +19,7 @@ export default function Register() {
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { name, email };
+      const userProfile = { firstName, lastName, email };
       register(userProfile, password).then(() => navigate("/"));
     }
   };
@@ -25,12 +28,21 @@ export default function Register() {
     <Form onSubmit={registerClick}>
       <fieldset>
         <FormGroup>
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">First Name</Label>
           <Input
-            id="name"
+            id="first-name"
             type="text"
             autoFocus
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="last-name">Last Name</Label>
+          <Input
+            id="last-name"
+            type="text"
+            autoFocus
+            onChange={(e) => setLastName(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
@@ -41,6 +53,12 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>
+        <FormGroup>
+                <Label htmlFor="school">Select A School</Label>
+                <select onChange={(e) => setSchool(e.target.value)}>
+                {schools.map((school) => <option value={school.id} key={`addschool--${school.id}`}>{school.name}</option>)}
+                </select>
+            </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
           <Input

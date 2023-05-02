@@ -62,10 +62,10 @@ export const logout = () => {
 };
 
 
-export const register = (userProfile, password) => {
-  return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+export const register = (user, password) => {
+  return firebase.auth().createUserWithEmailAndPassword(user.email, password)
     .then((createResponse) => _saveUser({
-      ...userProfile,
+      ...user,
       firebaseUserId: createResponse.user.uid
     }).then(() => _onLoginStatusChangedHandler(true)));
 };
