@@ -187,5 +187,132 @@ namespace JuniorTriWizardTournament.Repositories
                 }
             }
         }
-    }
+
+        public FavoriteSubject GetFavoriteSubjectByFavoriteSubjectId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT fs.Id as FavoriteSubjectId, u.Id as UserId, u.FirstName, u.LastName, s.Name AS SubjectName, s.Id as SubjectId                            
+                        FROM FavoriteSubjects fs
+                        JOIN Users u ON fs.UserId = u.Id
+                        JOIN Subjects s ON fs.SubjectId = s.Id
+                        WHERE fs.Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    FavoriteSubject favoriteSubject = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        favoriteSubject = new FavoriteSubject()
+                        {
+                            Id = DbUtils.GetInt(reader, "FavoriteSubjectId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            SubjectId = DbUtils.GetInt(reader, "SubjectId"),
+                            Subject = new Subject()
+                            {
+                                //Id = DbUtils.GetInt(reader, "SubjectId"),
+                                Name = DbUtils.GetString(reader, "SubjectName"),
+                            },
+                            User = new User()
+                            {
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                //Id = DbUtils.GetInt(reader, "UserId"),
+                            }
+                        };
+                    }
+                    reader.Close();
+
+                    return favoriteSubject;
+                }
+            }
+        }
+
+        public List<FavoriteSubject> GetFavoriteSubjects()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT fs.Id as FavoriteSubjectId, u.Id as UserId, u.FirstName, u.LastName, s.Name AS SubjectName, s.Id as SubjectId                              
+                                        FROM FavoriteSubjects fs
+                                        JOIN Users u ON fs.UserId = u.Id
+                                        JOIN Subjects s ON fs.SubjectId = s.Id";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var favoriteSubjects = new List<FavoriteSubject>();
+                        while (reader.Read())
+                        {
+                            favoriteSubjects.Add(new FavoriteSubject()
+                            {
+                                Id = DbUtils.GetInt(reader, "FavoriteSubjectId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
+                                SubjectId = DbUtils.GetInt(reader, "SubjectId"),
+                                Subject = new Subject()
+                                {
+                                    //Id = DbUtils.GetInt(reader, "SubjectId"),
+                                    Name = DbUtils.GetString(reader, "SubjectName"),
+                                },
+                                User = new User()
+                                {
+                                    FirstName = DbUtils.GetString(reader, "FirstName"),
+                                    LastName = DbUtils.GetString(reader, "LastName"),
+                                    //Id = DbUtils.GetInt(reader, "UserId"),
+                                }
+                            });
+                        }
+                        return favoriteSubjects;
+                    }
+                }
+            }
+        }
+
+        public List<FavoriteSubject> GetFavoriteSubjectsByUserId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT fs.Id as FavoriteSubjectId, u.Id as UserId, u.FirstName, u.LastName, s.Name AS SubjectName, s.Id as SubjectId                              
+                                        FROM FavoriteSubjects fs
+                                        JOIN Users u ON fs.UserId = u.Id
+                                        JOIN Subjects s ON fs.SubjectId = s.Id
+                                        WHERE u.Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    var reader = cmd.ExecuteReader();
+                    var favoriteSubjects = new List<FavoriteSubject>();
+                    while (reader.Read())
+                    {
+                        favoriteSubjects.Add(new FavoriteSubject()
+                        {
+                            Id = DbUtils.GetInt(reader, "FavoriteSubjectId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            SubjectId = DbUtils.GetInt(reader, "SubjectId"),
+                            Subject = new Subject()
+                            {
+                                //Id = DbUtils.GetInt(reader, "SubjectId"),
+                                Name = DbUtils.GetString(reader, "SubjectName"),
+                            },
+                            User = new User()
+                            {
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                //Id = DbUtils.GetInt(reader, "UserId"),
+                            }
+                        });
+                    }
+                    return favoriteSubjects;
+                }
+            }
+        }
+        }
 }

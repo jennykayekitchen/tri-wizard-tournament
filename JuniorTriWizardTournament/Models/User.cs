@@ -27,6 +27,12 @@ namespace JuniorTriWizardTournament.Models
 
         public string AboutMe { get; set; }
 
+        [Required]
+        public Subject Subject { get; set; }
+
+        [Required]
+        public FavoriteSubject FavoriteSubject { get; set; }
+
         public int TotalPoints { get; set; }
 
 
