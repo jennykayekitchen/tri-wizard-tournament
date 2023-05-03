@@ -80,10 +80,11 @@ namespace JuniorTriWizardTournament.Controllers
 
         }
 
-        private User GetCurrentUser()
+        [HttpGet("currentuser")]
+        public IActionResult GetCurrentUser()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepository.GetByFirebaseUserId(firebaseUserId);
+            return Ok(_userRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
         [HttpGet("favoritesubject/{id}")]
