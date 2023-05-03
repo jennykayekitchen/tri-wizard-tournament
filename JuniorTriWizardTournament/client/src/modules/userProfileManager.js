@@ -34,16 +34,7 @@ export const updateUserProfile = (userObj) => {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                id: userObj.id,
-                displayName: userObj.displayName,
-                firstName: userObj.firstName,
-                lastName: userObj.lastName,
-                email: userObj.email,
-                imageLocation: userObj.imageLocation,
-                userTypeId: userObj.userTypeId,
-                activated: userObj.activated
-            })
+            body: JSON.stringify(userObj)
         })
             .then(res => res.json())
     })
