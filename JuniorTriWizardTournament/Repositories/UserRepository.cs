@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
+
 namespace JuniorTriWizardTournament.Repositories
 {
     public class UserRepository : BaseRepository, IUserRepository
@@ -314,5 +315,9 @@ namespace JuniorTriWizardTournament.Repositories
                 }
             }
         }
-        }
+
+       
+    }
+
 }
+
