@@ -21,16 +21,13 @@ namespace JuniorTriWizardTournament.Models
 
         [Required]
         public int SchoolId { get; set; }
-
-        [Required]
+                
         public School School { get; set; }
 
         public string AboutMe { get; set; }
-
-        [Required]
+                
         public Subject Subject { get; set; }
-
-        [Required]
+                
         public FavoriteSubject FavoriteSubject { get; set; }
 
         public int TotalPoints { get; set; }

@@ -9,7 +9,7 @@ namespace JuniorTriWizardTournament.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class SchoolController : ControllerBase
     {
         private readonly ISchoolRepository _schoolRepository;

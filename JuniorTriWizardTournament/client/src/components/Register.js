@@ -3,23 +3,25 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { register } from "../modules/authManager";
 
+
 export default function Register() {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [school, setSchool] = useState();
-  const [schools, setSchools] = useState();
+  const [emailAddress, setEmailAddress] = useState();
+  const [schoolId, setSchoolId] = useState();  
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+
+
 
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { firstName, lastName, email };
+      const userProfile = { firstName, lastName, emailAddress, schoolId };
       register(userProfile, password).then(() => navigate("/"));
     }
   };
@@ -50,15 +52,17 @@ export default function Register() {
           <Input
             id="email"
             type="text"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmailAddress(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
                 <Label htmlFor="school">Select A School</Label>
-                <select onChange={(e) => setSchool(e.target.value)}>
-                {schools.map((school) => <option value={school.id} key={`addschool--${school.id}`}>{school.name}</option>)}
+                <select onChange={(e) => setSchoolId(e.target.value)}>
+                <option value="1">Hogwarts School of Witchcraft and Wizardry</option>
+                <option value="2">Beauxbatons Academy of Magic</option>
+                <option value="3">The Durmstrang Institute</option>
                 </select>
-            </FormGroup>
+        </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
           <Input

@@ -3,7 +3,6 @@ import "firebase/auth";
 
 const _apiUrl = "/api/user";
 
-
 const _doesUserExist = (firebaseUserId) => {
   return getToken().then((token) =>
     fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
@@ -26,7 +25,6 @@ const _saveUser = (userProfile) => {
     }).then(resp => resp.json()));
 };
 
-
 export const getToken = () => {
   const currentUser = firebase.auth().currentUser;
   if (!currentUser) {
@@ -34,8 +32,6 @@ export const getToken = () => {
   }
   return currentUser.getIdToken();
 };
-
-
 
 export const login = (email, pw) => {
   return firebase.auth().signInWithEmailAndPassword(email, pw)
@@ -62,10 +58,10 @@ export const logout = () => {
 };
 
 
-export const register = (user, password) => {
-  return firebase.auth().createUserWithEmailAndPassword(user.email, password)
+export const register = (userProfile, password) => {
+  return firebase.auth().createUserWithEmailAndPassword(userProfile.emailAddress, password)
     .then((createResponse) => _saveUser({
-      ...user,
+      ...userProfile,
       firebaseUserId: createResponse.user.uid
     }).then(() => _onLoginStatusChangedHandler(true)));
 };
