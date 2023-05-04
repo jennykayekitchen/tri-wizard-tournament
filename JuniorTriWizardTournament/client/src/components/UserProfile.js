@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import { Table, Button } from "reactstrap";
 import { getCurrentUser, updateUserProfile } from "../modules/userProfileManager";
+import { FavoriteSubject } from "./FavoriteSubject";
 
 export const UserProfile = () => {
   const [user, setUser] = useState({})
@@ -42,8 +42,7 @@ export const UserProfile = () => {
     
     updateUserProfile(updatedAboutMe)
     
-    setEditMode(false)
-      
+    setEditMode(false)   
 
   }
 
@@ -53,6 +52,7 @@ export const UserProfile = () => {
       <Table>
         <tbody>
           <tr>
+            {user.id}
             <th>Name</th>
             <td>{user.firstName} {user.lastName}</td>
           </tr>
@@ -64,7 +64,13 @@ export const UserProfile = () => {
             <th>School</th>
             <td>{user?.school?.name}</td>
           </tr>
-
+          {user.id && (
+            <tr>
+              <th>
+                <FavoriteSubject userId={user.id} />
+              </th>
+            </tr>
+          )}
           {editMode ? (
             <>
               <th>About Me</th>

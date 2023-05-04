@@ -20,5 +20,9 @@ namespace JuniorTriWizardTournament.Repositories
         List<FavoriteSubject> GetFavoriteSubjects();
 
         List<FavoriteSubject> GetFavoriteSubjectsByUserId(int id);
+
+        void Add(FavoriteSubject favoriteSubject);
+
+        void Delete(int id);
     }
 }

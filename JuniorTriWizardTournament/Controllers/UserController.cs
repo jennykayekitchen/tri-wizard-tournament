@@ -110,5 +110,19 @@ namespace JuniorTriWizardTournament.Controllers
             List<FavoriteSubject> favoriteSubjects = _userRepository.GetFavoriteSubjectsByUserId(id);
             return Ok(favoriteSubjects);
         }
+
+        [HttpPost("postfavoritesubject")]
+        public IActionResult Post(FavoriteSubject favoriteSubject)
+        {
+            _userRepository.Add(favoriteSubject);
+            return Ok(favoriteSubject);
+        }
+
+        [HttpDelete("deletefavoritesubject/{id}")]
+        public IActionResult Delete(int id)
+        {
+            _userRepository.Delete(id);
+            return NoContent();
+        }
     }
 }

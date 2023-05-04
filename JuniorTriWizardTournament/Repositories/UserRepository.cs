@@ -316,7 +316,37 @@ namespace JuniorTriWizardTournament.Repositories
             }
         }
 
-       
+        public void Add(FavoriteSubject favoriteSubject)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO FavoriteSubjects (SubjectId, UserId)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@SubjectId, @UserId)";
+                    DbUtils.AddParameter(cmd, "@SubjectId", favoriteSubject.SubjectId);
+                    DbUtils.AddParameter(cmd, "@UserId", favoriteSubject.UserId);                   
+
+                    favoriteSubject.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM FavoriteSubjects WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 
 }
