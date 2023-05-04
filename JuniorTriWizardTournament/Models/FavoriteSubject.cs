@@ -12,11 +12,9 @@ namespace JuniorTriWizardTournament.Models
 
         [Required]
         public int SubjectId { get; set; }
-
-        [Required]
+                
         public Subject Subject { get; set; }
-
-        [Required]
+                
         public User User { get; set; }
     }
 }
