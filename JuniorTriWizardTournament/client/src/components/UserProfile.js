@@ -39,71 +39,69 @@ export const UserProfile = () => {
       emailAddress: user.emailAddress,
       aboutMe: editedAboutMe,
     }
-    
+
     updateUserProfile(updatedAboutMe)
-    
-    setEditMode(false)   
+
+    setEditMode(false)
 
   }
 
   return (
     <>
+      <div>
+        Name: {user.firstName} {user.lastName}
+      </div>
+      <div>
+        Email: {user.emailAddress}
+      </div>
+      <div>
+        School: {user?.school?.name}
+      </div>
+      <div>
+        {user.id && (
 
-      <Table>
-        <tbody>
-          <tr>
-            {user.id}
-            <th>Name</th>
-            <td>{user.firstName} {user.lastName}</td>
-          </tr>
-          <tr>
-            <th>Email</th>
-            <td>{user.emailAddress}</td>
-          </tr>
-          <tr>
-            <th>School</th>
-            <td>{user?.school?.name}</td>
-          </tr>
-          {user.id && (
-            <tr>
-              <th>
-                <FavoriteSubject userId={user.id} />
-              </th>
-            </tr>
-          )}
-          {editMode ? (
-            <>
-              <th>About Me</th>
-              <td>{user?.aboutMe}</td>
-              <input type="text"
-                value={editedAboutMe}
-                onChange={handleAboutMeChange} />
-            </>
-          )
-            :
-            <>
-              <th>About Me</th>
-              <td>{user.aboutMe}</td>
-            </>
-          }
+          <FavoriteSubject userId={user.id} />
 
-          {editMode ? (
-              <>
-                
-                  <Button onClick={handleSaveChangesButtonClick}>Save Changes</Button>
-                  <Button onClick={handleCancelEditClick}>Cancel</Button>
-                
-              </>
-            )
-              : (
-                <>
-                    <Button onClick={handleEditClick}>Edit About Me</Button>                    
-                </>
-              )
-          }
+        )}
+      </div>
+      {editMode ? (
+        <>
+          <div>
+            About Me:{user?.aboutMe}
+            <input type="text"
+              value={editedAboutMe}
+              onChange={handleAboutMeChange} />
+          </div>
+        </>
+      )
+        :
+        <>
+          <div>
+            About Me:
+            <div>
+              {user.aboutMe}
+            </div>
+          </div>
+        </>
+      }
+      {editMode ? (
+        <>
+          <div>
+            <Button onClick={handleSaveChangesButtonClick}>Save Changes</Button>
+            <Button onClick={handleCancelEditClick}>Cancel</Button>
+          </div>
+        </>
+      )
+        : (
+          <>
+            <div>
+              <Button onClick={handleEditClick}>Edit About Me</Button>
+            </div>
+          </>
+        )
+      }
 
-        </tbody>
-      </Table>
+
     </>
   )
 }
