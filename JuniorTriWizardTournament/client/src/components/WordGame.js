@@ -96,8 +96,8 @@ export const WordGame = () => {
     return (
         <>
             <div className="hangman-container">
-                <h1 className="text-center">Hangman</h1>
-
+                <h1 className="text-center">Word Game</h1>
+                <div>Total Points: {user?.totalPoints}</div>
 
                 <div className="float-right">Wrong Guesses: {mistake} of {defaultSettings.maxWrong}</div>
                 <div className="gemstones">
@@ -118,7 +118,7 @@ export const WordGame = () => {
                         </div>)
                 }
                 </p>
-                <button className="btn btn-info" onClick={resetButton}>Reset</button>
+                <button className="btn btn-info" onClick={resetButton}>Start New Game</button>
             </div>
         </>
     )
