@@ -8,7 +8,7 @@ export const UserProfile = () => {
   const [user, setUser] = useState({})
   const [editMode, setEditMode] = useState(false)
   const [editedAboutMe, setEditedAboutMe] = useState(user?.aboutMe)
-
+  
   useEffect(() => {
     getCurrentUser()
       .then(userData => {

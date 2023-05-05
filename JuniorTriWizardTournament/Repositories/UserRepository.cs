@@ -176,12 +176,14 @@ namespace JuniorTriWizardTournament.Repositories
                                             FirstName = @firstName,
                                             LastName = @lastName,
                                             EmailAddress = @emailAddress,
-                                            AboutMe = @aboutMe                                                                                        
+                                            AboutMe = @aboutMe,
+                                            TotalPoints = @totalPoints
                                         WHERE Id = @id";
                     DbUtils.AddParameter(cmd, "@firstName", user.FirstName);
                     DbUtils.AddParameter(cmd, "@lastName", user.LastName);
                     DbUtils.AddParameter(cmd, "@emailAddress", user.EmailAddress);
                     DbUtils.AddParameter(cmd, "@aboutMe", user.AboutMe);
+                    DbUtils.AddParameter(cmd, "@totalPoints", user.TotalPoints);
                     DbUtils.AddParameter(cmd, "@id", user.Id);
 
                     cmd.ExecuteNonQuery();

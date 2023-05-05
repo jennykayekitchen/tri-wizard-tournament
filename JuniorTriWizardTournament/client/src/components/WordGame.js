@@ -5,18 +5,28 @@ import step2 from "../images/gemstone3.png"
 import step3 from "../images/gemstone2.png"
 import step4 from "../images/gemstone1.png"
 import step5 from "../images/gemstone0.png"
-import { getAllWords, getWord } from "../modules/wordManager"
+import { getWord } from "../modules/wordManager"
 import "./Hangman.css"
+import { getCurrentUser, updateUserProfile } from "../modules/userProfileManager"
 
 export const WordGame = () => {
+    const [mistake, setMistake] = useState(0)
+    const [guessed, setGuessed] = useState(new Set([]))
+    const [answer, setAnswer] = useState("")
+    const [user, setUser] = useState({})
+    //const [points, setPoints] = useState()
+
+    useEffect(() => {
+        getCurrentUser()
+            .then(userData => {
+                setUser(userData)
+            })
+    }, [answer])
+
     const defaultSettings = {
         maxWrong: 5,
         images: [step0, step1, step2, step3, step4, step5]
     }
-
-    const [mistake, setMistake] = useState(0)
-    const [guessed, setGuessed] = useState(new Set([]))
-    const [answer, setAnswer] = useState("")
 
     useEffect(() => {
         getWord().then((word) => {
@@ -68,6 +78,21 @@ export const WordGame = () => {
         });
     }
 
+    let points = 5 - mistake 
+
+    const handleGameOver = () => {
+        const addPoints = {
+            id: user?.id,
+            firebaseUserId: user?.firebaseUserId,
+            firstName: user?.firstName,
+            lastName: user?.lastName,
+            emailAddress: user.emailAddress,
+            totalPoints: user?.totalPoints + points,
+        }
+
+        updateUserProfile(addPoints)
+    }
+
     return (
         <>
             <div className="hangman-container">
@@ -79,11 +104,11 @@ export const WordGame = () => {
                     <img src={defaultSettings.images[mistake]} alt=""></img>
                 </div>
                 <p>{guessedWord().indexOf(" _ ") == -1
-                    ? <p>You WIN!</p>
+                    ? <p>You WIN!{handleGameOver()}</p>
                     : (mistake > 4
                         ?
                         <div>
-                            <p>YOU LOSE </p>
+                            <p>YOU LOSE {handleGameOver()}</p>
                             <p>Correct Word is: {answer}</p>
                         </div>
                         :
