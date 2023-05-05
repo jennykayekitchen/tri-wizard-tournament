@@ -6,3 +6,7 @@
 img {
     height: 100px;
 }
+
+.answer {
+    text-decoration: none;
+}

@@ -14,30 +14,24 @@ export const WordGame = () => {
         images: [step0, step1, step2, step3, step4, step5]
     }
 
-    //const [words, setWords] = useState([]);
-    const [mistake, setMistake] = useState(0);
-    const [guessed, setGuessed] = useState(new Set([]));
-    const [answer, setAnswer] = useState("");
-
+    const [mistake, setMistake] = useState(0)
+    const [guessed, setGuessed] = useState(new Set([]))
+    const [answer, setAnswer] = useState("")
 
     useEffect(() => {
         getWord().then((word) => {
             if (word.name.length) {
-                setAnswer(word.name.toLowerCase());
+                setAnswer(word.name.toLowerCase())
             }
         });
-    }, []);
-
-    //usedEffect watch mistake and if mistake is 5 or more, call reset function
-
-    
+    }, [])
 
     const handleGuess = (event) => {
         let letter = event.target.value
         let copyOfGuessed = new Set(guessed)
         copyOfGuessed.add(letter)
         setGuessed(copyOfGuessed)
-            setMistake(mistake + (answer.includes(letter) ? 0 : 1))
+        setMistake(mistake + (answer.includes(letter) ? 0 : 1))
     }
 
     const generateButtons = () => {
@@ -55,23 +49,24 @@ export const WordGame = () => {
     }
 
     const guessedWord = () => {
-        return answer?.split("").map(letter => (guessed.has(letter) ? letter : " _ "))
-    }
-
+        return answer.split("").map((letter) => {
+            if (letter === " ") {
+                return "\u00A0";
+            } else {
+                return guessed.has(letter) ? letter : " _ ";
+            }
+        })
+    };
 
     const resetButton = () => {
         setMistake(0)
         setGuessed(new Set([]))
-        //pick a new answer
         getWord().then((word) => {
             if (word.name.length) {
                 setAnswer(word.name.toLowerCase());
             }
         });
     }
-
-    let gameOver = mistake >= defaultSettings.maxWrong
-    //let gameStat = generateButtons()
 
     return (
         <>
@@ -83,13 +78,24 @@ export const WordGame = () => {
                 <div className="gemstones">
                     <img src={defaultSettings.images[mistake]} alt=""></img>
                 </div>
-                <div className="text-center">Guess the word:</div>
-                <p>{!gameOver ? guessedWord().join("") : answer}</p>
-                <p>
-                    {generateButtons()}
+                <p>{guessedWord().indexOf(" _ ") == -1
+                    ? <p>You WIN!</p>
+                    : (mistake > 4
+                        ?
+                        <div>
+                            <p>YOU LOSE </p>
+                            <p>Correct Word is: {answer}</p>
+                        </div>
+                        :
+                        <div>
+                            <p className='Hangman-word'>{guessedWord()}</p>
+                            <p className='Hangman-btns'>{generateButtons()}</p>
+                        </div>)
+                }
                 </p>
                 <button className="btn btn-info" onClick={resetButton}>Reset</button>
             </div>
         </>
     )
 }
+
