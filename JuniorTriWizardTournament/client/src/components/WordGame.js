@@ -14,7 +14,7 @@ export const WordGame = () => {
     const [guessed, setGuessed] = useState(new Set([]))
     const [answer, setAnswer] = useState("")
     const [user, setUser] = useState({})
-    //const [points, setPoints] = useState()
+    
 
     useEffect(() => {
         getCurrentUser()
