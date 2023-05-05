@@ -58,6 +58,9 @@ export const UserProfile = () => {
         School: {user?.school?.name}
       </div>
       <div>
+        Total Points: {user?.totalPoints}
+      </div>
+      <div>
         {user.id && (
 
           <FavoriteSubject userId={user.id} />
