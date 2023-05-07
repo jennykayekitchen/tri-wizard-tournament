@@ -30,7 +30,6 @@ namespace JuniorTriWizardTournament.Models
                 
         public FavoriteSubject FavoriteSubject { get; set; }
 
-        public int TotalPoints { get; set; }
 
 
 

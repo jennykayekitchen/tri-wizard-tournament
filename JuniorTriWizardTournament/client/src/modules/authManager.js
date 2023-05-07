@@ -54,7 +54,9 @@ export const login = (email, pw) => {
 
 
 export const logout = () => {
-  firebase.auth().signOut()  
+  firebase.auth().signOut().then(() => {
+    window.location.reload("/")
+  })  
 };
 
 
@@ -68,7 +70,7 @@ export const register = (userProfile, password) => {
 
 export const me = () => {
   return getToken().then((token) =>
-    fetch(`${_apiUrl}/me`, {
+    fetch(`${_apiUrl}/currentuser`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
