@@ -20,7 +20,7 @@ namespace JuniorTriWizardTournament.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT u.Id, u.FirebaseUserId, u.FirstName, u.LastName, 
-                               u.EmailAddress, u.SchoolId, u.TotalPoints, u.AboutMe, s.Id, s.Name as SchoolName                               
+                               u.EmailAddress, u.SchoolId, u.AboutMe, s.Id, s.Name as SchoolName                               
                           FROM Users u
                                LEFT JOIN Schools s on u.SchoolId = s.Id
                          WHERE FirebaseUserId = @FirebaseuserId";
@@ -41,7 +41,6 @@ namespace JuniorTriWizardTournament.Repositories
                             EmailAddress = DbUtils.GetString(reader, "EmailAddress"),
                             AboutMe = DbUtils.GetString(reader, "AboutMe"),
                             SchoolId = DbUtils.GetInt(reader, "SchoolId"),
-                            TotalPoints = DbUtils.GetInt(reader, "TotalPoints"),
                             School = new School()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
@@ -65,7 +64,7 @@ namespace JuniorTriWizardTournament.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT u.Id, u.FirebaseUserId, u.FirstName, u.LastName, 
-                               u.EmailAddress, u.SchoolId, u.TotalPoints, u.AboutMe, s.Id, s.Name as SchoolName                               
+                               u.EmailAddress, u.SchoolId, u.AboutMe, s.Id, s.Name as SchoolName                               
                           FROM Users u
                                LEFT JOIN Schools s on u.SchoolId = s.Id
                          WHERE u.Id = @id";
@@ -86,7 +85,6 @@ namespace JuniorTriWizardTournament.Repositories
                             EmailAddress = DbUtils.GetString(reader, "EmailAddress"),
                             AboutMe = DbUtils.GetString(reader, "AboutMe"),
                             SchoolId = DbUtils.GetInt(reader, "SchoolId"),
-                            TotalPoints = DbUtils.GetInt(reader, "TotalPoints"),
                             School = new School()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
@@ -108,7 +106,8 @@ namespace JuniorTriWizardTournament.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.EmailAddress, u.SchoolId, u.TotalPoints, u.AboutMe, s.Id, s.Name as SchoolName                               
+                    cmd.CommandText = @"SELECT u.Id, u.FirebaseUserId, u.FirstName, u.LastName, u.EmailAddress, u.SchoolId, u.AboutMe, 
+                                        s.Id, s.Name as SchoolName                               
                                         FROM [Users] u
                                         LEFT JOIN Schools s ON u.SchoolId = s.Id
                                         ORDER BY u.LastName";
@@ -127,7 +126,6 @@ namespace JuniorTriWizardTournament.Repositories
                                 EmailAddress = DbUtils.GetString(reader, "EmailAddress"),
                                 AboutMe = DbUtils.GetString(reader, "AboutMe"),
                                 SchoolId = DbUtils.GetInt(reader, "SchoolId"),
-                                TotalPoints = DbUtils.GetInt(reader, "TotalPoints"),
                                 School = new School()
                                 {
                                     Id = DbUtils.GetInt(reader, "Id"),
@@ -148,16 +146,15 @@ namespace JuniorTriWizardTournament.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Users (FirebaseUserId, FirstName, LastName, EmailAddress, SchoolId, AboutMe, TotalPoints)
+                    cmd.CommandText = @"INSERT INTO Users (FirebaseUserId, FirstName, LastName, EmailAddress, SchoolId, AboutMe)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @EmailAddress, @SchoolId, @AboutMe, @TotalPoints)";
+                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @EmailAddress, @SchoolId, @AboutMe)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", user.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", user.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", user.LastName);
                     DbUtils.AddParameter(cmd, "@SchoolId", user.SchoolId);
                     DbUtils.AddParameter(cmd, "@EmailAddress", user.EmailAddress);
                     DbUtils.AddParameter(cmd, "@AboutMe", user.AboutMe);
-                    DbUtils.AddParameter(cmd, "@TotalPoints", user.TotalPoints);
 
                     user.Id = (int)cmd.ExecuteScalar();
                 }
@@ -176,14 +173,12 @@ namespace JuniorTriWizardTournament.Repositories
                                             FirstName = @firstName,
                                             LastName = @lastName,
                                             EmailAddress = @emailAddress,
-                                            AboutMe = @aboutMe,
-                                            TotalPoints = @totalPoints
+                                            AboutMe = @aboutMe                                            
                                         WHERE Id = @id";
                     DbUtils.AddParameter(cmd, "@firstName", user.FirstName);
                     DbUtils.AddParameter(cmd, "@lastName", user.LastName);
                     DbUtils.AddParameter(cmd, "@emailAddress", user.EmailAddress);
                     DbUtils.AddParameter(cmd, "@aboutMe", user.AboutMe);
-                    DbUtils.AddParameter(cmd, "@totalPoints", user.TotalPoints);
                     DbUtils.AddParameter(cmd, "@id", user.Id);
 
                     cmd.ExecuteNonQuery();

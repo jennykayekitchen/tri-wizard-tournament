@@ -27,7 +27,7 @@ export const UserProfile = () => {
   const handleCancelEditClick = () => {
     setEditedAboutMe(user?.aboutMe)
 
-    setEditMode(false)
+    setEditMode(false);
   }
 
   const handleSaveChangesButtonClick = () => {
