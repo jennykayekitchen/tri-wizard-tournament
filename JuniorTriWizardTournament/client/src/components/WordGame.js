@@ -16,20 +16,21 @@ export const WordGame = () => {
     const [guessed, setGuessed] = useState(new Set([]));
     const [answer, setAnswer] = useState("");
     const [user, setUser] = useState({});
-    const [isGameOver, setIsGameOver] = useState(false)
     const [gameStatus, setGameStatus] = useState("playing")
 
     useEffect(() => {
+        const remainingLetters = answer
+          .split("")
+          .filter((letter) => !guessed.has(letter) && letter !== " ");
+        
         if (mistake > 4) {
           setGameStatus("lost");
+        } else if (remainingLetters.length === 0) {
+          setGameStatus("won");
         } else {
-          const remainingLetters = answer
-            .split("")
-            .filter((letter) => !guessed.has(letter) && letter !== " ");
-          if (remainingLetters.length === 0) {
-            setGameStatus("won");
-          }
+            setGameStatus("playing")
         }
+
       }, [guessed, mistake, answer]);
 
 
@@ -60,27 +61,27 @@ export const WordGame = () => {
         setGuessed(copyOfGuessed);
         const newMistake = mistake + (answer.includes(letter) ? 0 : 1);
         setMistake(newMistake);
-        
+
         const answerWithoutSpaces = answer.replace(/\s/g, '');
         const correctlyGuessedNonSpaceChars = answerWithoutSpaces.split('').filter(char => guessed.has(char));
         if (correctlyGuessedNonSpaceChars.length === answerWithoutSpaces.length) {
-          setGameStatus("won");
+            setGameStatus("won");
         } else if (newMistake > defaultSettings.maxWrong) {
-          setGameStatus("lost");
+            setGameStatus("lost");
         }
-      
+
         if (gameStatus === "won") {
-          let finalScore = Math.max(defaultSettings.maxWrong - newMistake, 0);
-      
-          // Wait for getCurrentUser to complete before calling addGamePoints
-          const userData = await getCurrentUser();
-          const addPoints = {
-              userId: parseInt(userData?.id),
-              totalPoints: finalScore,
-          };
-          addGamePoints(addPoints);
+            let finalScore = Math.max(defaultSettings.maxWrong - newMistake, 0);
+
+            // Wait for getCurrentUser to complete before calling addGamePoints
+            const userData = await getCurrentUser();
+            const addPoints = {
+                userId: parseInt(userData?.id),
+                totalPoints: finalScore,
+            };
+            addGamePoints(addPoints);
         }
-      };
+    };
 
     useEffect(() => {
         if (gameStatus === "won") {
@@ -134,6 +135,26 @@ export const WordGame = () => {
         });
     };
 
+    const gameArea = () => {
+        if (gameStatus === "won") {
+            return <p>You WIN!</p>
+        }
+
+        if (gameStatus === "lost") {
+            return <div>
+            <p>YOU LOSE</p>
+            <p>Correct Word is: {answer}</p>
+        </div>
+        }
+
+        if (gameStatus === "playing") {
+            return <div>
+            <p className="Hangman-word">{guessedWord()}</p>
+            <p className="Hangman-btns">{generateButtons()}</p>
+        </div>
+        }
+    }
+
     return (
         <>
             <div className="hangman-container">
@@ -144,19 +165,7 @@ export const WordGame = () => {
                     <img src={defaultSettings.images[mistake]} alt=""></img>
                 </div>
                 <p>
-                    {gameStatus === "won" ? (
-                        <p>You WIN!</p>
-                    ) : gameStatus === "lost" ? (
-                        <div>
-                            <p>YOU LOSE</p>
-                            <p>Correct Word is: {answer}</p>
-                        </div>
-                    ) : (
-                        <div>
-                            <p className="Hangman-word">{guessedWord()}</p>
-                            <p className="Hangman-btns">{generateButtons()}</p>
-                        </div>
-                    )}
+                    {gameArea()}
                 </p>
                 <button className="btn btn-info" onClick={resetButton}>
                     Start New Game
