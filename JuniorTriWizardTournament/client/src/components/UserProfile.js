@@ -5,12 +5,13 @@ import { getCurrentUser, updateUserProfile } from "../modules/userProfileManager
 import { FavoriteSubject } from "./FavoriteSubject";
 import { getTotalPointsByUserId } from "../modules/gameManager";
 
-export const UserProfile = () => {
+
+export const UserProfile = () => {  
   const [user, setUser] = useState({})
   const [editMode, setEditMode] = useState(false)
   const [editedAboutMe, setEditedAboutMe] = useState(user?.aboutMe)
   const [totalPoints, setTotalPoints] = useState(0)
-
+  
   useEffect(() => {
     getCurrentUser()
       .then(userData => {

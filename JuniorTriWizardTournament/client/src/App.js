@@ -6,9 +6,10 @@ import ApplicationViews from "./components/ApplicationViews";
 import { BrowserRouter } from "react-router-dom";
 import { onLoginStatusChange, me } from "./modules/authManager";
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     onLoginStatusChange(setIsLoggedIn);
@@ -16,9 +17,9 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      me().then(setUserProfile);
+      me().then(setUser);
     } else {
-      setUserProfile(null);
+      setUser(null);
     }
   }, [isLoggedIn]);
 
@@ -30,12 +31,16 @@ function App() {
   }
 
   return (
+    
     <div className="App">
       <BrowserRouter>
-        <Header isLoggedIn={isLoggedIn} userProfile={userProfile} />
-        <ApplicationViews isLoggedIn={isLoggedIn} />
+      
+        <Header isLoggedIn={isLoggedIn} user={user} />
+        <ApplicationViews isLoggedIn={isLoggedIn} user={user}/>
+                
       </BrowserRouter>
     </div>
+    
   );
 }
 
