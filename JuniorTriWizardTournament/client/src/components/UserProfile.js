@@ -3,18 +3,27 @@ import { useEffect, useState } from "react";
 import { Table, Button } from "reactstrap";
 import { getCurrentUser, updateUserProfile } from "../modules/userProfileManager";
 import { FavoriteSubject } from "./FavoriteSubject";
+import { getTotalPointsByUserId } from "../modules/gameManager";
 
 export const UserProfile = () => {
   const [user, setUser] = useState({})
   const [editMode, setEditMode] = useState(false)
   const [editedAboutMe, setEditedAboutMe] = useState(user?.aboutMe)
-  
+  const [totalPoints, setTotalPoints] = useState(0)
+
   useEffect(() => {
     getCurrentUser()
       .then(userData => {
         setUser(userData)
       })
   }, [editMode])
+
+  useEffect(() => {
+    getTotalPointsByUserId(user.id)
+      .then(userData => {
+        setTotalPoints(userData.totalPoints)
+      })
+  }, [user.id])
 
   const handleEditClick = () => {
     setEditMode(true)
@@ -41,9 +50,7 @@ export const UserProfile = () => {
     }
 
     updateUserProfile(updatedAboutMe)
-
     setEditMode(false)
-
   }
 
   return (
@@ -58,7 +65,7 @@ export const UserProfile = () => {
         School: {user?.school?.name}
       </div>
       <div>
-        Total Points: {user?.totalPoints}
+        Total Points: {totalPoints}
       </div>
       <div>
         {user.id && (
