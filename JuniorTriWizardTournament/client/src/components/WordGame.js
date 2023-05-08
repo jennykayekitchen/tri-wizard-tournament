@@ -14,23 +14,32 @@ import { TotalPoints } from "./TotalPoints"
 export const WordGame = () => {
     const [mistake, setMistake] = useState(0);
     const [guessed, setGuessed] = useState(new Set([]));
-    const [answer, setAnswer] = useState("");
+    const [answer, setAnswer] = useState(null);
     const [user, setUser] = useState({});
     const [gameStatus, setGameStatus] = useState("playing")
 
     useEffect(() => {
-        const remainingLetters = answer
-            .split("")
-            .filter((letter) => !guessed.has(letter) && letter !== " ");
+        if (answer) {
+            const remainingLetters = answer
+                .split("")
+                .filter((letter) => !guessed.has(letter));
 
-        if (mistake > 4) {
-            setGameStatus("lost");
-        } else if (remainingLetters.length === 0) {
-            setGameStatus("won");
-        } else {
-            setGameStatus("playing")
+            if (mistake > 4) {
+                setGameStatus("lost");
+            } else if (remainingLetters.length === 0) {
+                let finalScore = Math.max(defaultSettings.maxWrong - mistake, 0);
+                const addPoints = {
+                    userId: parseInt(user?.id),
+                    totalPoints: finalScore,
+                };
+
+                addGamePoints(addPoints);
+                setGameStatus("won")
+                    ;
+            } else {
+                setGameStatus("playing")
+            }
         }
-
     }, [guessed, mistake, answer]);
 
 
@@ -62,30 +71,7 @@ export const WordGame = () => {
         const newMistake = mistake + (answer.includes(letter) ? 0 : 1);
         setMistake(newMistake);
 
-        if (gameStatus === "won") {
-            let finalScore = Math.max(defaultSettings.maxWrong - newMistake, 0);
-
-            const userData = await getCurrentUser();
-            const addPoints = {
-                userId: parseInt(userData?.id),
-                totalPoints: finalScore,
-            };
-            addGamePoints(addPoints);
-        }
     };
-
-    useEffect(() => {
-        if (gameStatus === "won") {
-            let finalScore = Math.max(defaultSettings.maxWrong - mistake, 0);
-            const addPoints = {
-                userId: parseInt(user?.id),
-                totalPoints: finalScore,
-            };
-
-            addGamePoints(addPoints);
-
-        }
-    }, [gameStatus]);
 
 
     const generateButtons = () => {
@@ -106,9 +92,11 @@ export const WordGame = () => {
     };
 
     const guessedWord = () => {
-        return answer.split("").map((letter) => {
-            return guessed.has(letter) ? letter : " _ ";
-        }).join("");
+        if (answer) {
+            return answer.split("").map((letter) => {
+                return guessed.has(letter) ? letter : " _ ";
+            }).join("");
+        }
     };
 
     const resetButton = () => {
@@ -124,7 +112,7 @@ export const WordGame = () => {
 
     const gameArea = () => {
         if (gameStatus === "won") {
-            return <p>You WIN!</p>
+
         }
 
         if (gameStatus === "lost") {
@@ -161,4 +149,3 @@ export const WordGame = () => {
         </>
     )
 }
-

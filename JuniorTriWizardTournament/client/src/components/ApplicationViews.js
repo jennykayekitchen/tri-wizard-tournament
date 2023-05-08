@@ -5,7 +5,7 @@ import Register from "./Register";
 import { UserProfile } from "./UserProfile";
 import { WordGame } from "./WordGame";
 
-export default function ApplicationViews({ isLoggedIn }) {
+export default function ApplicationViews({ user, isLoggedIn }) {
   return (
     <Routes>
       <Route path="/">        
