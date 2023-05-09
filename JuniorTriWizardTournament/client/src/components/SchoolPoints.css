@@ -1,0 +1,22 @@
+.school-points-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30%;
+    z-index: 10;
+}
+
+.school-points-title {
+    font-size: 1.25rem;
+}
+
+.school-points-list {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.school {
+    text-align: left;
+    margin-top: 10px;
+}
+
+  

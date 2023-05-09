@@ -1,0 +1,9 @@
+.user-profile-container {
+    margin-top: 10%;
+}
+
+.user-profile-contents {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

@@ -64,8 +64,7 @@ export const FavoriteSubject = ({ userId }) => {
                         return <div key={favoriteSubject.id}>• {favoriteSubject?.subject?.name}</div>
                     }
                 )}
-                <button onClick={(clickEvent) => handleDeleteButtonClick(clickEvent)}
-                    className="btn btn-primary">
+                <button onClick={(clickEvent) => handleDeleteButtonClick(clickEvent)}>
                     Delete Favorite Subjects{`(s)`}
                 </button>
             </div></>
