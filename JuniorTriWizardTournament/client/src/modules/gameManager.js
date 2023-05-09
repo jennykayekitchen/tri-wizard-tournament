@@ -31,3 +31,14 @@ export const addGamePoints = async (addPoints) => {
     return data;
 };
 
+export const getAllPoints = () => {
+    return getToken().then(token => {
+        return fetch(baseUrl, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+            .then(res => res.json())
+    })
+};

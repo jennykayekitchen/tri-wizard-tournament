@@ -1,4 +1,5 @@
 ﻿using JuniorTriWizardTournament.Models;
+using System.Collections.Generic;
 
 namespace JuniorTriWizardTournament.Repositories
 {
@@ -7,5 +8,7 @@ namespace JuniorTriWizardTournament.Repositories
         //Game GetPointsBySchoolId(int id);
         Game GetPointsByUserId(int id);
         void Add(Game game);
+
+        List<Game> GetAllPoints();
     }
 }

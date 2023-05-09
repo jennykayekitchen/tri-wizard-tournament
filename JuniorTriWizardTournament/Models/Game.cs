@@ -13,7 +13,7 @@ namespace JuniorTriWizardTournament.Models
         [Required]
         public int TotalPoints { get; set; }
 
-        //public School School { get; set; }
+        public School School { get; set; }
 
         //public User User { get; set; }
     }

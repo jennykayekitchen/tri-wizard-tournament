@@ -1,6 +1,7 @@
 ﻿using JuniorTriWizardTournament.Models;
 using JuniorTriWizardTournament.Utils;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace JuniorTriWizardTournament.Repositories
@@ -42,43 +43,41 @@ namespace JuniorTriWizardTournament.Repositories
             }
         }
 
-        //public Game GetPointsBySchoolId(int id)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                SELECT SUM(g.TotalPoints) as TotalPoints, s.Name                             
-        //                FROM Games g        
-        //                JOIN Users u ON g.UserId = u.Id
-        //                JOIN Schools s ON u.SchoolId = s.Id 
-        //                WHERE s.Id = @id
-        //                GROUP BY s.Name";
+        public List<Game> GetAllPoints()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                SELECT SUM(g.TotalPoints) as TotalPoints, s.Name                             
+                FROM Games g        
+                JOIN Users u ON g.UserId = u.Id
+                JOIN Schools s ON u.SchoolId = s.Id                         
+                GROUP BY s.Name
+                ORDER BY SUM(g.TotalPoints) DESC";
 
-        //            DbUtils.AddParameter(cmd, "@id", id);
+                    List<Game> games = new List<Game>();
 
-        //            Game game = null;
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        games.Add(new Game()
+                        {
+                            TotalPoints = DbUtils.GetInt(reader, "TotalPoints"),
+                            School = new School()
+                            {
+                                Name = DbUtils.GetString(reader, "Name"),
+                            }
+                        });
+                    }
+                    reader.Close();
 
-        //            var reader = cmd.ExecuteReader();
-        //            if (reader.Read())
-        //            {
-        //                game = new Game()
-        //                {
-        //                    TotalPoints = DbUtils.GetInt(reader, "TotalPoints"),
-        //                    School = new School()
-        //                    {
-        //                        Name = DbUtils.GetString(reader, "Name"),
-        //                    }
-        //                };
-        //            }
-        //            reader.Close();
-
-        //            return game;
-        //        }
-        //    }
-        //}
+                    return games;
+                }
+            }
+        }
 
         public void Add(Game game)
         {

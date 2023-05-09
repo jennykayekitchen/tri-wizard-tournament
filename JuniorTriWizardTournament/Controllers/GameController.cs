@@ -28,16 +28,11 @@ namespace JuniorTriWizardTournament.Controllers
 
         }
 
-        //[HttpGet("schooltotalpoints/{id}")]
-        //public IActionResult GetPointsBySchoolId(int id)
-        //{
-        //    var game = _gameRepository.GetPointsBySchoolId(id);
-        //    if (game == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(game);
-        //}
+        [HttpGet]
+        public IActionResult GetAllPoints()
+        {
+            return Ok(_gameRepository.GetAllPoints());
+        }
 
         [HttpPost("postgame")]
         public IActionResult Post(Game game)
