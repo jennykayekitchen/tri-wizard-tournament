@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllPoints } from "../modules/gameManager";
+import "./SchoolPoints.css"
 
 export const SchoolPoints = () => {
     const [schoolPoints, setSchoolPoints] = useState([])
@@ -11,10 +12,15 @@ export const SchoolPoints = () => {
     }, []);
 
     return (
-        <div>            
-            {schoolPoints.map((school) => {
-                return <div key={school?.name}>{school?.school?.name}: {school?.totalPoints}</div>
-            })}
+        <div className="school-points-container">
+            <div className="school-points-title">
+                Current Standings
+            </div>
+            <div className="school-points-list">
+                {schoolPoints.map((school) => {
+                    return <div className="school" key={school?.id}>{school?.school?.name}: {school?.totalPoints}</div>
+                })}
+            </div>
         </div>
     )
 

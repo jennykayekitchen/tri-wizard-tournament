@@ -5,7 +5,7 @@ import { getCurrentUser, updateUserProfile } from "../modules/userProfileManager
 import { FavoriteSubject } from "./FavoriteSubject";
 import { getTotalPointsByUserId } from "../modules/gameManager";
 import { SchoolPoints } from "./SchoolPoints";
-
+import "./UserProfile.css" 
 
 export const UserProfile = () => {
   const [user, setUser] = useState({})
@@ -59,7 +59,9 @@ export const UserProfile = () => {
 
   return (
     <>
-      <SchoolPoints />
+    <div className="user-profile-container">
+      <div className="user-profile-contents">
+      
       <div>
         Name: {user.firstName} {user.lastName}
       </div>
@@ -98,21 +100,22 @@ export const UserProfile = () => {
       {editMode ? (
         <>
           <div>
-            <Button onClick={handleSaveChangesButtonClick}>Save Changes</Button>
-            <Button onClick={handleCancelEditClick}>Cancel</Button>
+            <button onClick={handleSaveChangesButtonClick}>Save Changes</button>
+            <button onClick={handleCancelEditClick}>Cancel</button>
           </div>
         </>
       )
         : (
           <>
             <div>
-              <Button onClick={handleEditClick}>Edit About Me</Button>
+              <button onClick={handleEditClick}>Edit About Me</button>
             </div>
           </>
         )
       }
 
-
+      </div>
+      </div>
     </>
   )
 }

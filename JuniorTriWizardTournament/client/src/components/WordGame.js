@@ -6,7 +6,6 @@ import step3 from "../images/gemstone2.png";
 import step4 from "../images/gemstone1.png";
 import step5 from "../images/gemstone0.png";
 import { getWord } from "../modules/wordManager";
-import "./Hangman.css";
 import { getCurrentUser } from "../modules/userProfileManager";
 import { addGamePoints, getTotalPointsByUserId } from "../modules/gameManager";
 import { TotalPoints } from "./TotalPoints"
@@ -79,8 +78,7 @@ export const WordGame = () => {
         return alphabet
             .split("")
             .map((letter) => (
-                <button
-                    className="btn btn-lg btn-primary m-2"
+                <button                    
                     key={letter}
                     value={letter}
                     onClick={event => handleGuess(event)}
@@ -142,7 +140,7 @@ export const WordGame = () => {
                 <p>
                     {gameArea()}
                 </p>
-                <button className="btn btn-info" onClick={resetButton}>
+                <button onClick={resetButton}>
                     Start New Game
                 </button>
             </div>
