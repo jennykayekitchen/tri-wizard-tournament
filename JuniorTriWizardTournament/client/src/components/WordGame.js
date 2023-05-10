@@ -110,36 +110,39 @@ export const WordGame = () => {
 
     const gameArea = () => {
         if (gameStatus === "won") {
-
+            return <><p>You've guessed the word correctly!</p> 
+            <p>{5 - mistake} points to {user?.school?.name}!</p></>
         }
 
         if (gameStatus === "lost") {
             return <div>
-                <p>YOU LOSE</p>
+                <p>You have not guessed the correct word.</p>
+                <p>No points will be awarded to {user?.school?.name}.</p>
                 <p>Correct Word is: {answer}</p>
             </div>
         }
 
         if (gameStatus === "playing") {
             return <div>
-                <p className="Hangman-word">{guessedWord()}</p>
-                <p className="Hangman-btns">{generateButtons()}</p>
+                <p className="word-game-word">{guessedWord()}</p>
+                <p className="word-game-btns">{generateButtons()}</p>
             </div>
         }
     }
 
     return (
         <>
-            <div className="hangman-container">
-                <h1 className="text-center">Word Game</h1>
+            <div className="word-game-container">
+                <div className="word-game-title">Words of the Wizard World!</div>
+                <div className="word-game-section">{user?.firstName}'s Current Points</div>
                 <TotalPoints userId={user?.id} gameStatus={gameStatus} />
-                <div className="float-right">Wrong Guesses: {mistake} of {defaultSettings.maxWrong}</div>
                 <div className="gemstones">
                     <img src={defaultSettings.images[mistake]} alt=""></img>
                 </div>
                 <p>
                     {gameArea()}
                 </p>
+                <div className="float-right">Wrong Guesses: {mistake} of {defaultSettings.maxWrong}</div>
                 <button onClick={resetButton}>
                     Start New Game
                 </button>
