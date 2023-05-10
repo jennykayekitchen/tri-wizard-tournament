@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import step0 from "../images/gemstone5.png";
-import step1 from "../images/gemstone4.png";
-import step2 from "../images/gemstone3.png";
-import step3 from "../images/gemstone2.png";
-import step4 from "../images/gemstone1.png";
-import step5 from "../images/gemstone0.png";
+import step0 from "../images/5point.png";
+import step1 from "../images/4point.png";
+import step2 from "../images/3point.png";
+import step3 from "../images/2point.png";
+import step4 from "../images/1point.png";
+import step5 from "../images/0point.png";
 import { getWord } from "../modules/wordManager";
 import { getCurrentUser } from "../modules/userProfileManager";
 import { addGamePoints, getTotalPointsByUserId } from "../modules/gameManager";
 import { TotalPoints } from "./TotalPoints"
+import "./WordGame.css"
 
 export const WordGame = () => {
     const [mistake, setMistake] = useState(0);
@@ -72,7 +73,6 @@ export const WordGame = () => {
 
     };
 
-
     const generateButtons = () => {
         const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return alphabet
@@ -103,7 +103,7 @@ export const WordGame = () => {
         setGameStatus("playing");
         getWord().then((word) => {
             if (word.name.length) {
-                setAnswer(word.name.toLowerCase());
+                setAnswer(word.name.toUpperCase());
             }
         });
     };

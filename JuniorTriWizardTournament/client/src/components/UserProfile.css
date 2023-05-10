@@ -12,6 +12,7 @@
 .welcome-message{
     font-family: 'Yeseva One', cursive;
     font-size: 2rem;
+    margin-top: 20px;
 }
 
 .user-info {
