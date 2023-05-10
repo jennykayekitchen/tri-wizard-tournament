@@ -14,10 +14,8 @@ export const getTotalPointsByUserId = (id) => {
     })
 }
 
-export const addGamePoints = async (addPoints) => {
-    console.log("Adding game points:", addPoints);
-    const token = await getToken();
-    console.log("Token:", token);
+export const addGamePoints = async (addPoints) => {    
+    const token = await getToken();    
     const resp = await fetch(`${baseUrl}/postgame`, {
         method: "POST",
         headers: {

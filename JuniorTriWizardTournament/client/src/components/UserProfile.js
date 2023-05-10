@@ -5,7 +5,7 @@ import { getCurrentUser, updateUserProfile } from "../modules/userProfileManager
 import { FavoriteSubject } from "./FavoriteSubject";
 import { getTotalPointsByUserId } from "../modules/gameManager";
 import { SchoolPoints } from "./SchoolPoints";
-import "./UserProfile.css" 
+import "./UserProfile.css"
 
 export const UserProfile = () => {
   const [user, setUser] = useState({})
@@ -59,63 +59,70 @@ export const UserProfile = () => {
 
   return (
     <>
-    <div className="user-profile-container">
-      <div className="user-profile-contents">
-      
-      <div>
-        Name: {user.firstName} {user.lastName}
-      </div>
-      <div>
-        Email: {user.emailAddress}
-      </div>
-      <div>
-        School: {user?.school?.name}
-      </div>
-      <div>
-        Total Points: {totalPoints}
-      </div>
-      <div>
-        {user?.id && (<FavoriteSubject userId={user.id} />)}
-      </div>
-      {editMode ? (
-        <>
-          <div>
-            About Me:{user?.aboutMe}
-            <input type="text"
-              value={editedAboutMe}
-              onChange={handleAboutMeChange} />
-          </div>
-        </>
-      )
-        :
-        <>
-          <div>
-            About Me:
-            <div>
-              {user.aboutMe}
+      <div className="user-profile-container">
+        <div className="welcome-message">
+          Hello, {user.firstName}!
+        </div>
+        <div className="user-profile-contents">
+          <div className="user-info">
+            <div className="user-name">
+              <div className="user-section">Name</div> {user.firstName} {user.lastName}
+            </div>
+            <div className="user-name">
+              <div className="user-section">Email Address</div> {user.emailAddress}
+            </div>
+            <div className="user-name">
+              <div className="user-section">School</div> {user?.school?.name}
+            </div>
+            <div className="user-points">
+              <div className="user-section">Current Points</div> {totalPoints}
             </div>
           </div>
-        </>
-      }
-      {editMode ? (
-        <>
-          <div>
-            <button onClick={handleSaveChangesButtonClick}>Save Changes</button>
-            <button onClick={handleCancelEditClick}>Cancel</button>
-          </div>
-        </>
-      )
-        : (
-          <>
-            <div>
-              <button onClick={handleEditClick}>Edit About Me</button>
+          <div className="user-edits">
+            <div className="user-fav-subjects">
+              {user?.id && (<FavoriteSubject userId={user.id} />)}
             </div>
-          </>
-        )
-      }
-
-      </div>
-      </div>
+            {editMode ? (
+              <>
+                <div className="user-about-me">
+                  <div>
+                  <div className="user-section">About Me</div>{user?.aboutMe}
+                    <input type="text"
+                      value={editedAboutMe}
+                      onChange={handleAboutMeChange} />
+                  </div>
+                  </div>
+                </>
+                )
+                :
+                <>
+                  <div className="user-about-me">
+                  <div className="user-section">About Me</div>
+                    <div>
+                      {user.aboutMe}
+                    </div>
+                  </div>                  
+                </>
+            }
+                {editMode ? (
+                  <>
+                    <div>
+                      <button onClick={handleSaveChangesButtonClick}>Save Changes</button>
+                      <button onClick={handleCancelEditClick}>Cancel</button>
+                    </div>
+                  </>
+                )
+                  : (
+                    <>
+                      <div>
+                        <button onClick={handleEditClick}>Edit About Me</button>
+                      </div>
+                    </>
+                  )
+                }
+              </div>
+          </div>
+        </div>      
     </>
   )
 }

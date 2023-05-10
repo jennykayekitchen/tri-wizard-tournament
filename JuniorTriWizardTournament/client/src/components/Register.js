@@ -27,62 +27,65 @@ export default function Register() {
   };
 
   return (
-    <Form onSubmit={registerClick}>
-      <fieldset>
-        <FormGroup>
-          <Label htmlFor="name">First Name</Label>
-          <Input
-            id="first-name"
-            type="text"
-            autoFocus
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="last-name">Last Name</Label>
-          <Input
-            id="last-name"
-            type="text"
-            autoFocus
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            id="email"
-            type="text"
-            onChange={(e) => setEmailAddress(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-                <Label htmlFor="school">Select A School</Label>
-                <select onChange={(e) => setSchoolId(e.target.value)}>
-                <option value="1">Hogwarts School of Witchcraft and Wizardry</option>
-                <option value="2">Beauxbatons Academy of Magic</option>
-                <option value="3">The Durmstrang Institute</option>
-                </select>
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input
-            id="confirmPassword"
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Button>Register</Button>
-        </FormGroup>
-      </fieldset>
-    </Form>
+    <div className="form-container">
+    <form onSubmit={registerClick}>
+  <fieldset>
+    <div className="form-input">
+      <label htmlFor="first-name">First Name: </label>
+      <input
+        id="first-name"
+        type="text"
+        autoFocus
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+    </div>
+    <div className="form-input">
+      <label htmlFor="last-name">Last Name: </label>
+      <input
+        id="last-name"
+        type="text"
+        autoFocus
+        onChange={(e) => setLastName(e.target.value)}
+      />
+    </div>
+    <div className="form-input">
+      <label htmlFor="email">Email: </label>
+      <input
+        id="email"
+        type="text"
+        onChange={(e) => setEmailAddress(e.target.value)}
+      />
+    </div>
+    <div className="form-input">
+      <label htmlFor="school">Select A School</label>
+      <select onChange={(e) => setSchoolId(e.target.value)}>
+        <option value="1">Hogwarts School of Witchcraft and Wizardry</option>
+        <option value="2">Beauxbatons Academy of Magic</option>
+        <option value="3">The Durmstrang Institute</option>
+      </select>
+    </div>
+    <div className="form-input">
+      <label htmlFor="password">Password: </label>
+      <input
+        id="password"
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+    </div>
+    <div className="form-input">
+      <label htmlFor="confirmPassword">Confirm Password: </label>
+      <input
+        id="confirmPassword"
+        type="password"
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      />
+    </div>
+    <div className="form-input">
+      <button type="submit">Register </button>
+    </div>
+  </fieldset>
+</form>
+
+    </div>
   );
 }
