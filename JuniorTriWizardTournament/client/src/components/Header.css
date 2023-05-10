@@ -19,15 +19,14 @@
     box-shadow: 3px 0 5px 0 rgba(0, 0, 0, 0.5)
 }
 
-.navbar-links{
-    
+.navbar-links{    
     display: flex;
     flex-direction: column;
 }
 
 .navbar-title-set {
     display: flex;
-    flex-direction: row;  
+    flex-direction: row;     
 }
 
 .nav-item {    
@@ -51,9 +50,8 @@
 } 
 
 .navbar-logo {    
-    margin-top: 9px;
-    margin-right: 5px;
-    
+    margin-top: 14px;
+    margin-right: 5px;    
 }
 
 ul {

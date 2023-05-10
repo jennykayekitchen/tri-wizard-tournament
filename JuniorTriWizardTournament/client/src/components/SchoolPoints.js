@@ -17,6 +17,7 @@ export const SchoolPoints = () => {
                 Current Standings
             </div>
             <div className="school-points-list">
+                <div className="list-title">Points Per School</div>
                 {schoolPoints.map((school) => {
                     return <div className="school" key={school?.id}>{school?.school?.name}: {school?.totalPoints}</div>
                 })}

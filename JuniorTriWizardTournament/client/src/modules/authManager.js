@@ -55,7 +55,7 @@ export const login = (email, pw) => {
 
 export const logout = () => {
   firebase.auth().signOut().then(() => {
-    window.location.reload("/")
+    window.location.href = "/login"
   })  
 };
 

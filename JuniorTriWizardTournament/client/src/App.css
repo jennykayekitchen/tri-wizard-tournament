@@ -5,8 +5,9 @@ body {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgb(248, 248, 248);   
-  color: #001029; 
+  background-image: url(./images/background.png);
+    background-repeat: repeat;
+    height: 100%;
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
 }

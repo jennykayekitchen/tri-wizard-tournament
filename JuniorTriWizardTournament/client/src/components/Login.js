@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
+import "./Login.css"
 
 export default function Login() {
   let navigate = useNavigate();
@@ -17,32 +17,34 @@ export default function Login() {
   };
 
   return (
-    <Form onSubmit={loginSubmit}>
+    <div className="form-container">
+    <form onSubmit={loginSubmit}>
       <fieldset>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
+      <div className="form-input">
+          <label htmlFor="email">Email: </label>
+          <input
             id="email"
             type="text"
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
+        </div>
+        <div className="form-input">
+          <label htmlFor="password">Password: </label>
+          <input
             id="password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
-          <Button>Login</Button>
-        </FormGroup>
+        </div>
+        <div className="form-input">
+          <button type="submit">Login</button>
+        </div>
         <em>
           Not registered? <Link to="/register">Register</Link>
         </em>
       </fieldset>
-    </Form>
+    </form>
+    </div>
   );
 }

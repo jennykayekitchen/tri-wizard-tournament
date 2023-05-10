@@ -1,0 +1,17 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 78%;
+    float: right;
+}
+
+form {
+    width: 40%;
+    margin-top: 15%    
+}
+
+.form-input{
+    margin-bottom: 5px;
+}

@@ -1,22 +1,38 @@
 .school-points-container {
     display: flex;
     flex-direction: column;
-    margin-left: 30%;
-    z-index: 10;
+    width: 78%;
+    float: right;
 }
 
 .school-points-title {
-    font-size: 1.25rem;
+    font-family: 'Yeseva One', cursive;
+    font-size: 2rem;    
+    background-color: #41577a;
+    height: 58px;
+    text-align: center;
+    width: 100%;
+    color: rgb(248, 248, 248);
+    padding-top: 15px;
 }
 
 .school-points-list {
     padding-left: 16px;
-    padding-right: 16px;
+    padding-right: 16px; 
+    margin-top: 10px;  
 }
 
 .school {
     text-align: left;
     margin-top: 10px;
+    text-align: center;
+}
+
+.list-title{
+    text-align: center;
+    font-family: 'Yeseva One', cursive;
+    margin-top: 10px;
+    font-size: 1.2rem;
 }
 
   
