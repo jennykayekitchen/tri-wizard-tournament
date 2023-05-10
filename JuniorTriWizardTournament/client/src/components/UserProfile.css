@@ -1,9 +1,30 @@
 .user-profile-container {
-    margin-top: 10%;
+    margin-left: 30%;
 }
 
 .user-profile-contents {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: flex;    
+    flex-direction: row;
+    margin-top: 20px;
+    border: 2px solid green;
+}
+
+.welcome-message{
+    font-family: 'Yeseva One', cursive;
+    font-size: 2rem;
+}
+
+.user-info {
+    border: 2px solid brown;
+    margin-right: 25px;
+}
+
+.user-section {
+    font-family: 'Yeseva One', cursive;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.user-edits {
+    border: 2px solid pink;
 }

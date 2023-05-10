@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { addFavoriteSubject, deleteFavoriteSubject, getUserFavoriteSubjectsById } from "../modules/userProfileManager";
 import { getAllSubjects } from "../modules/subjectManager";
+import "./UserProfile.css"
 
 export const FavoriteSubject = ({ userId }) => {
     const [favoriteSubjects, setFavoriteSubjects] = useState([])
@@ -59,7 +60,7 @@ export const FavoriteSubject = ({ userId }) => {
         <>{favoriteSubjects.length
             ?
             <><div className="favoriteSubjects">
-                Favorite Subject(s): {favoriteSubjects.map(
+                <div className="user-section">Favorite Subject(s)</div> {favoriteSubjects.map(
                     (favoriteSubject) => {
                         return <div key={favoriteSubject.id}>• {favoriteSubject?.subject?.name}</div>
                     }
