@@ -14,13 +14,13 @@ import "./WordGame.css"
 export const WordGame = () => {
     const [mistake, setMistake] = useState(0);
     const [guessed, setGuessed] = useState(new Set([]));
-    const [answer, setAnswer] = useState(null);
+    const [answer, setAnswer] = useState({});
     const [user, setUser] = useState({});
     const [gameStatus, setGameStatus] = useState("playing")
 
     useEffect(() => {
-        if (answer) {
-            const remainingLetters = answer
+        if (answer && answer.name) {
+            const remainingLetters = answer.name
                 .split("")
                 .filter((letter) => !guessed.has(letter));
 
@@ -57,7 +57,7 @@ export const WordGame = () => {
     useEffect(() => {
         getWord().then((word) => {
             if (word.name.length) {
-                setAnswer(word.name.toUpperCase());
+                setAnswer(word);
             }
         });
     }, []);
@@ -68,7 +68,7 @@ export const WordGame = () => {
         let copyOfGuessed = new Set(guessed);
         copyOfGuessed.add(letter);
         setGuessed(copyOfGuessed);
-        const newMistake = mistake + (answer.includes(letter) ? 0 : 1);
+        const newMistake = mistake + (answer.name.includes(letter) ? 0 : 1);
         setMistake(newMistake);
 
     };
@@ -90,12 +90,14 @@ export const WordGame = () => {
     };
 
     const guessedWord = () => {
-        if (answer) {
-            return answer.split("").map((letter) => {
-                return guessed.has(letter) ? letter : " _ ";
-            }).join("");
+        if (answer && answer.name) {
+          return answer.name.split("").map((letter) => {
+            return guessed.has(letter) ? letter : " _ ";
+          }).join("");
+        } else {
+          return "";
         }
-    };
+      };
 
     const resetButton = () => {
         setMistake(0);
@@ -103,7 +105,7 @@ export const WordGame = () => {
         setGameStatus("playing");
         getWord().then((word) => {
             if (word.name.length) {
-                setAnswer(word.name.toUpperCase());
+                setAnswer(word);
             }
         });
     };
@@ -125,7 +127,8 @@ export const WordGame = () => {
 
         if (gameStatus === "playing") {
             return <div>
-                <p className="word-game-word">{guessedWord()}</p>
+                <div className="word-game-word">{guessedWord()}</div>
+                <div className="word-game-category">Hint: {answer?.category?.name}</div>
                 <div className="word-game-guesses">Wrong Guesses: {mistake} of {defaultSettings.maxWrong}</div>
                 <div className="word-game-btns">{generateButtons()}</div>
             </div>
