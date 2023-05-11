@@ -7,7 +7,7 @@ Introducing the Junior Tri-Wizard Tournament website, where students from Hogwar
 
 - Profile Customization: Add an "about me" section to your profile, showcasing your unique personality and sharing interesting facts about yourself.
 
-- Word Guessing Game: Participate in an enchanting word guessing game, putting your magical knowledge to the test. Earn valuable points for your school with each correct answer.
+- Word Guessing Game: Participate in an enchanting word guessing game using your own wand, putting your magical knowledge to the test. Earn valuable points for your school with each correct answer.
 
 - School Standings: Stay up-to-date with the current standings of Hogwarts, Beauxbatons, and Durmstrang. Witness the friendly competition between schools and see how your school ranks.
 
