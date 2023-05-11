@@ -113,26 +113,28 @@ export const WordGame = () => {
     const gameArea = () => {
         if (gameStatus === "won") {
             return <> <div className="game-over">
-            <p>You've guessed the word correctly!</p>
-                <p>{5 - mistake} points to {user?.school?.name}!</p></div></>
+            <div>You've guessed the word correctly!</div>
+                <div>{5 - mistake} points to {user?.school?.name}!</div></div></>
         }
 
         if (gameStatus === "lost") {
             return <div className="game-over">
-                <p>Answer: {answer}</p>
-                <p>You have not guessed the correct word.</p>
-                <p>No points will be awarded to {user?.school?.name}.</p>
+                <div>Answer: {answer.name}</div>
+                <div>You have not guessed the correct word.</div>
+                <div>No points will be awarded to {user?.school?.name}.</div>
             </div>
         }
 
         if (gameStatus === "playing") {
-            return <div>
+            return (
+              <div>
                 <div className="word-game-word">{guessedWord()}</div>
                 <div className="word-game-category">Hint: {answer?.category?.name}</div>
                 <div className="word-game-guesses">Wrong Guesses: {mistake} of {defaultSettings.maxWrong}</div>
                 <div className="word-game-btns">{generateButtons()}</div>
-            </div>
-        }
+              </div>
+            );
+          }
     }
 
     return (

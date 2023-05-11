@@ -9,7 +9,8 @@
 
 form {
     width: 40%;
-    margin-top: 15%    
+    margin-top: 15%;
+    background-color: #f8f8f8;   
 }
 
 .form-input{
