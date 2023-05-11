@@ -7,7 +7,7 @@ import step4 from "../images/1point.png";
 import step5 from "../images/0point.png";
 import { getWord } from "../modules/wordManager";
 import { getCurrentUser } from "../modules/userProfileManager";
-import { addGamePoints, getTotalPointsByUserId } from "../modules/gameManager";
+import { addGamePoints } from "../modules/gameManager";
 import { TotalPoints } from "./TotalPoints"
 import "./WordGame.css"
 
@@ -157,6 +157,20 @@ export const WordGame = () => {
                     Start New Game
                 </button>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
             </div>
         </>
     )
