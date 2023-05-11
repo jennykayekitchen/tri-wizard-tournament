@@ -139,7 +139,8 @@ export const WordGame = () => {
 
     return (
         <>
-            <div className="word-game-container">
+        
+            <div className="word-game-container" >
                 <div className="word-game-title">Words of the Wizarding World!</div>
                 <div className="word-game-points">
                     <div className="word-game-section">{user?.firstName}'s Current Points</div>

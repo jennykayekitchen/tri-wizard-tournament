@@ -66,7 +66,7 @@ export const FavoriteSubject = ({ userId }) => {
                     }
                 )}
                 <button onClick={(clickEvent) => handleDeleteButtonClick(clickEvent)}>
-                    Delete Favorite Subjects{`(s)`}
+                    Delete Favorite Subject{`(s)`}
                 </button>
             </div></>
             :

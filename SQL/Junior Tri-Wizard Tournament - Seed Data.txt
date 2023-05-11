@@ -88,10 +88,17 @@ VALUES
 
 INSERT INTO [Subjects] ([Name])
 VALUES
-('Herbology'),
-('Transfiguration'),
-('History of Magic'),
-('Study of Ancient Runes');
+	('Charms'),
+	('Potions'),
+	('Defense Against the Dark Arts'),
+	('Astronomy'),	
+	('Divination'),
+	('Care of Magical Creatures'),	
+	('Arithmancy'),
+	('Muggle Studies'),
+	('Study of Ancient Magical Texts'),
+	('Apparition'),
+	('Alchemy');
 
 INSERT INTO [FavoriteSubjects] ([UserId], [SubjectId])
 VALUES
