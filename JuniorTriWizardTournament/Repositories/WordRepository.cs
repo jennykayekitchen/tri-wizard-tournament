@@ -49,8 +49,9 @@ namespace JuniorTriWizardTournament.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Name                               
-                                        FROM Words                                        
+                    cmd.CommandText = @"SELECT w.Id, w.Name, c.Name as CategoryName                               
+                                        FROM Words w
+                                        LEFT JOIN Categories c ON w.CategoryId = c.Id
                                         ORDER BY Name";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -62,6 +63,11 @@ namespace JuniorTriWizardTournament.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name"),
+                                Category = new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "Id"),
+                                    Name = DbUtils.GetString(reader, "CategoryName"),
+                                }
                             });
                         }
                         return words;

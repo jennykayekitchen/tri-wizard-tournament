@@ -1,7 +1,7 @@
 .school-points-container {
     display: flex;
     flex-direction: column;
-    width: 78%;
+    width: 79%;
     float: right;
 }
 
@@ -35,4 +35,14 @@
     font-size: 1.2rem;
 }
 
+.school-crests {
+    display: flex;
+    justify-content: center;
+    margin: 15px;    
+}
+
+.school-crests img {
+    height: 150px;
+    margin: 10px;
+}
   

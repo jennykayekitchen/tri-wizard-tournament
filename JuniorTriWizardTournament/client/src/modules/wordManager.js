@@ -30,6 +30,3 @@ export const getWord = () => {
     })
 };
 
-// export const randomWord = () => {
-//     return words[Math.floor(Math.random() * words.length)]
-// }
