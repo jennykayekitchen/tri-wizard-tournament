@@ -14,7 +14,14 @@ Introducing the Junior Tri-Wizard Tournament website, where students from Hogwar
 Join the Junior Tri-Wizard Tournament and experience the thrill of competition, camaraderie, and magical challenges as you represent your school! 
 
 ## Demo
+- Register as a student and complete a user profile with your favorite subjects and a short bio.
+![](register_user_profile.gif)
 
+- Play the game with your own wand and win points for your school.
+![](play_game.gif)
+
+- See which school is in the lead.
+![](current_standings.gif)
 
 ## Wireframe
 
