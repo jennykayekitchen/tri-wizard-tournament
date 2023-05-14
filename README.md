@@ -34,20 +34,20 @@ Join the Junior Tri-Wizard Tournament and experience the thrill of competition, 
 - JSX
 - CSS
 
-
 ## Installation
 
 - Clone down this repository.
 - Ensure node and npm are installed on your machine.
 
 ## Project Goals
-
-
-
-## Lessons Learned
-
+1. Build a user-friendly and visually appealing interface for participants to register, view tournament details, compete in the challenge, and view their school's current score.
+1. Develop a backend system to handle user authentication, data storage, and application management.
+1 .Implement a scoring mechanism to track participants' scores and calculate their school's overall performance.
+1. Implement client-side routing using React to enable seamless navigation between different pages of the application.
+1. Incorporate interactive features such as dropdowns, checkboxes, and buttons to enhance the user experience.
+1. Integrate APIs to fetch and display dynamic data, such as game details, participant information, and leaderboard standings.
 
 
 ## Acknowledgements
 
-- Special thanks go to the following: Devin, Hannah, Cassie, Kaci, Pritesh, and Akshay
+- Special thanks go to the following: Devin - the best group leader; Hannah, Cassie, and Kaci - members of the Room of Requirement and general cheerleaders; Pritesh and Akshay - always willing to look at the code and help; Shane - Coffee & Coding buddy for life.
