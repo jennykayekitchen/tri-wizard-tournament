@@ -14,8 +14,6 @@ export default function Register() {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-
-
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
@@ -58,7 +56,8 @@ export default function Register() {
     </div>
     <div className="form-input">
       <label htmlFor="school">Select A School</label>
-      <select onChange={(e) => setSchoolId(e.target.value)}>
+      <select value={schoolId} onChange={(e) => setSchoolId(parseInt(e.target.value))}>
+      <option value="0">Select A School</option>
         <option value="1">Hogwarts School of Witchcraft and Wizardry</option>
         <option value="2">Beauxbatons Academy of Magic</option>
         <option value="3">The Durmstrang Institute</option>

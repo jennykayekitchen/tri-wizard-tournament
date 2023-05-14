@@ -1,7 +1,7 @@
 import React from "react";
 import { logout } from "../modules/authManager";
 import "./Header.css"
-import logo from '../images/trophy.png'
+import logo from '../images/logo.png'
 
 export default function Header({ isLoggedIn }) {
 
@@ -10,11 +10,9 @@ export default function Header({ isLoggedIn }) {
     <div>
       <nav className="navbar-containter">
         <div className="navbar-title-set">
-          <img src={logo} className="navbar-logo"></img>
-          <a className="navbar-title" href="/">
-            Junior<br></br>
-            Tri-Wizard Tournament
-          </a>
+          <a href="/">
+          <img src={logo} className="navbar-logo" ></img>          
+        </a>
         </div>
         <div className="navbar-links">
           <ul>

@@ -16,18 +16,68 @@ VALUES
 ('Magical Beasts'),
 ('Places'),
 ('Potions, Spells, and Plants'),
-('Events');
+('Person or Profession'),
+('Magical Item');
 
 INSERT INTO [Words] ([Name], [CategoryId])
 VALUES
-('Basilisk', 1),
-('Hippogriff', 1),
-('Chamber of Secrets', 2),
-('Gringotts', 2),
-('Apparition', 3),
-('Floo Powder', 3),
-('Yule Ball', 4),
-('Death Day Party', 4);
+('BOGGART', '1'),
+	('DEMENTOR', '1'),
+	('DRAGON', '1'),
+	('FAWKES', '1'),
+	('HIPPOCAMPUS', '1'),
+	('HIPPOGRIFF', '1'),
+	('INFERI', '1'),
+	('NIFFLER', '1'),
+	('PHOENIX', '1'),
+	('THESTRAL', '1'),
+	('BEZOAR', '3'),
+	('FIREBOLT', '5'),
+	('GALLEON', '5'),
+	('HORCRUX', '5'),
+	('HOWLER', '5'),
+	('NIMBUS', '5'),
+	('PENSIEVE', '5'),
+	('PORTKEY', '5'),
+	('QUIBBLER', '5'),
+	('SNEAKOSCOPE', '5'),
+	('SNITCH', '5'),
+	('THUNDERBOLT', '5'),
+	('AUROR', '4'),
+	('DOBBY', '4'),
+	('DUMBLEDORE', '4'),
+	('GRYFFINDOR', '4'),
+	('HUFFLEPUFF', '4'),
+	('MUGGLE', '4'),
+	('PREFECT', '4'),
+	('RAVENCLAW', '4'),
+	('SCABBERS', '4'),
+	('SLYTHERIN', '4'),
+	('VEELA', '4'),
+	('VOLDEMORT', '4'),
+	('WIZARD', '4'),
+	('AZKABAN', '2'),
+	('GRINGOTTS', '2'),
+	('HOGSMEADE', '2'),
+	('HOGWARTS', '2'),
+	('MINISTRY', '2'),
+	('ACCIO', '3'),
+	('ALOHOMORA', '3'),
+	('ANIMAGUS', '3'),
+	('APPARITION', '3'),
+	('CHARMS', '3'),
+	('CRUCIO', '3'),
+	('EXPELLIARMUS', '3'),
+	('GILLYWEED', '3'),
+	('IMPERIO', '3'),
+	('LUMOS', '3'),
+	('MANDRAKE', '3'),
+	('OBLIVIATE', '3'),
+	('OCCAMY', '3'),
+	('PARSELTONGUE', '3'),
+	('PATRONUS', '3'),
+	('POLYJUICE', '3'),
+	('SECTUMSEMPRA', '3');
 
 INSERT INTO [Games] ([TotalPoints], [UserId])
 VALUES
@@ -38,10 +88,17 @@ VALUES
 
 INSERT INTO [Subjects] ([Name])
 VALUES
-('Herbology'),
-('Transfiguration'),
-('History of Magic'),
-('Study of Ancient Runes');
+	('Charms'),
+	('Potions'),
+	('Defense Against the Dark Arts'),
+	('Astronomy'),	
+	('Divination'),
+	('Care of Magical Creatures'),	
+	('Arithmancy'),
+	('Muggle Studies'),
+	('Study of Ancient Magical Texts'),
+	('Apparition'),
+	('Alchemy');
 
 INSERT INTO [FavoriteSubjects] ([UserId], [SubjectId])
 VALUES
