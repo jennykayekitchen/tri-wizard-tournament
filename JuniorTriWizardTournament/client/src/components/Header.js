@@ -26,7 +26,12 @@ export default function Header({ isLoggedIn }) {
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/wordgame">
-                      Play Game
+                      Play Word Game
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/tictactoe">
+                      Play TicTacToe Game
                     </a>
                   </li>
                   <li className="nav-item">
