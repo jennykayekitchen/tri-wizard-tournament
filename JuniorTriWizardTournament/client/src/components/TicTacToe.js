@@ -1,83 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState,   useEffect } from 'react';
 import "./TicTacToe.css"
 
 export const TicTacToe = () => {
-    const [turn, setTurn] = useState('x')
-    const [cells, setCells] = useState(Array(9).fill(''))
-    const [winner, setWinner] = useState()
+    const [turn, setTurn] = useState('x');
+  const [cells, setCells] = useState(Array(9).fill(''));
+  const [winner, setWinner] = useState("");
 
-    const checkForWinner = (squares) => {
-        let combos = {
-            across: [
-                [0, 1, 2],
-                [3, 4, 5],
-                [6, 7, 8]
-            ],
-            down: [
-                [0, 3, 6],
-                [1, 4, 7],
-                [2, 5, 8]
-            ],
-            diagonal: [
-                [0, 4, 8],
-                [2, 4, 6]
-            ]
-        }        
+  const checkForWinner = (squares) => {
+    let combos = {
+      across: [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]
+      ],
+      down: [
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8]
+      ],
+      diagonal: [
+        [0, 4, 8],
+        [2, 4, 6]
+      ]
+    }
 
-        for (let combo in combos) {
-            combos[combo].forEach((pattern) => {
-                if (
-                    squares[pattern[0]] === '' ||
-                    squares[pattern[1]] === '' ||
-                    squares[pattern[2]] === '' 
-                ) {
-                } else if (
-                    squares[pattern[0]] === squares[pattern[1]] &&
-                    squares[pattern[1]] === squares[pattern[2]]
-                ) {
-                    setWinner(squares[pattern[0]])
-                }
-            })
+    for (let combo in combos) {
+      combos[combo].forEach((pattern) => {
+        if (
+          squares[pattern[0]] === '' ||
+          squares[pattern[1]] === '' ||
+          squares[pattern[2]] === ''
+        ) {
+          // Do nothing if any cell in the pattern is empty
+        } else if (
+          squares[pattern[0]] === squares[pattern[1]] &&
+          squares[pattern[1]] === squares[pattern[2]]
+        ) {
+          setWinner(squares[pattern[0]]);
         }
+      })
     }
+  }
 
-    const handleRestart = () => {
-        setWinner(null)
-        setCells(Array(9).fill(''))
+  useEffect(() => {
+    if (cells.every(cell => cell !== '') && !winner) {
+      setWinner('tie');
     }
+  }, [cells, winner]);
 
-    const handleClick = (num) => {
-        if (cells[num]) {
-            alert('already clicked')
-            return
-        }
+  const handleRestart = () => {
+    setWinner('');
+    setCells(Array(9).fill(''));
+    setTurn('x');
+  }
 
-        let squares = [...cells]
-
-        if (turn === 'x') {
-            squares[num] = 'x';
-            setTurn('o');
-            setTimeout(function() {
-              var emptySquares = squares.filter(square => square !== 'x' && square !== 'o');
-              if (emptySquares.length > 0) {
-                var randomIndex = Math.floor(Math.random() * emptySquares.length);
-                var randomSquare = emptySquares[randomIndex];
-                var index = squares.indexOf(randomSquare);
-                squares[index] = 'o';
-                // Update the state or display logic to reflect the change
-              }
-              setTurn('x');
-            }, 700);          
-        }                  
-                
-        checkForWinner(squares)
-        setCells(squares)        
+  const handleClick = (num) => {
+    if (cells[num]) {
+      alert('already clicked');
+      return;
     }
-
-    const Cell = ({ num }) => {
-        return <td onClick={() => handleClick(num)}>{cells[num]}</td>
-    }
+  
+    let squares = [...cells];
+    squares[num] = 'x';
+    setCells(squares);
+    checkForWinner(squares);
     
+    if (!winner) {
+      setTurn('o');
+      setTimeout(() => {
+        const emptySquares = squares.filter(square => square !== 'x' && square !== 'o');
+        if (emptySquares.length > 0 && !winner) {
+          const randomIndex = Math.floor(Math.random() * emptySquares.length);
+          const randomSquare = emptySquares[randomIndex];
+          const index = squares.indexOf(randomSquare);
+          squares[index] = 'o';
+          checkForWinner(squares);
+          if (!winner) {
+            setCells(squares);
+            setTurn('x');
+          }
+        }
+      }, 5000);
+    }
+  }  
+
+  const Cell = ({ num }) => {
+    return <td onClick={() => handleClick(num)}>{cells[num]}</td>
+  }
+
     return (
         <div className="tictactoe-container">
             <h1 className='tictactoe-title'>Tic Tac Toe</h1>
@@ -115,3 +125,22 @@ export const TicTacToe = () => {
     );
 }
 
+
+
+    // const handleOTurn = () => {
+    //     let squares = [...cells]
+    //     setTimeout(function () {
+    //         var emptySquares = squares.filter(square => square !== 'x' && square !== 'o');
+    //         if (emptySquares.length > 0) {
+    //             var randomIndex = Math.floor(Math.random() * emptySquares.length);
+    //             var randomSquare = emptySquares[randomIndex];
+    //             var index = squares.indexOf(randomSquare);
+    //             squares[index] = 'o';
+    //         }
+    //     }, 700);
+    
+    //     checkForWinner(squares)
+    //     if (winner != 'o') {
+    //         setTurn('x')
+    //     }
+    // }

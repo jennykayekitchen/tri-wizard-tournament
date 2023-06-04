@@ -1,16 +1,16 @@
-name: Build and deploy .NET Core application to Web App juniortriwizardtournament with API Management Service JuniorTriWizardTournamentapi-JuniorTriWizardTournament
+name: Build and deploy .NET Core application to Web App JuniorTriWizardTournament20230604134224 with API Management Service JuniorTriWizardTournamentapiv3-JuniorTriWizardTournament
 on:
   push:
     branches:
     - jk-workingbranch26
 env:
-  AZURE_WEBAPP_NAME: juniortriwizardtournament
+  AZURE_WEBAPP_NAME: JuniorTriWizardTournament20230604134224
   AZURE_WEBAPP_PACKAGE_PATH: JuniorTriWizardTournament\publish
-  AZURE_APIM_RESOURCE_PATH: /
-  AZURE_APIM_RESOURCEGROUP: DefaultResourceGroup-EUS
-  AZURE_APIM_SERVICENAME: JuniorTriWizardTournamentapi
+  AZURE_APIM_RESOURCE_PATH: /mysqlserverjkk.database.windows.net
+  AZURE_APIM_RESOURCEGROUP: myResourceGroup
+  AZURE_APIM_SERVICENAME: JuniorTriWizardTournamentapiv3
   AZURE_APIM_API_ID: JuniorTriWizardTournament
-  AZURE_APIM_APPSERVICEURL: https://juniortriwizardtournament.azurewebsites.net
+  AZURE_APIM_APPSERVICEURL: https://juniortriwizardtournament20230604134224.azurewebsites.net
   SWASHBUCLE_ASPNET_CORE_CLI_PACKAGE_VERSION: 5.6.3
   SWASHBUCKLE_DOTNET_CORE_VERSION: 3.1.x
   API_IMPORT_SPECIFICATION_PATH: JuniorTriWizardTournament\publish\swagger.json
@@ -65,11 +65,11 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.juniortriwizardtournament_FFEF }}
+        publish-profile: ${{ secrets.JuniorTriWizardTournament20230604134224_0FE4 }}
     - name: Azure Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets._SPN }}
+        creds: ${{ secrets.JuniorTriWizardTournamentapiv3_SPN }}
     - name: Import API into Azure API Management
       run: az apim api import --path "${{ env.AZURE_APIM_RESOURCE_PATH }}" --resource-group "${{ env.AZURE_APIM_RESOURCEGROUP }}" --service-name "${{ env.AZURE_APIM_SERVICENAME }}" --api-id "${{ env.AZURE_APIM_API_ID }}" --service-url "${{ env.AZURE_APIM_APPSERVICEURL }}" --specification-path "${{ env.API_IMPORT_SPECIFICATION_PATH }}" --specification-format OpenApi --subscription-required false
     - name: logout
