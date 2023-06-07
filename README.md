@@ -13,6 +13,7 @@ Introducing the Junior Tri-Wizard Tournament website, where students from Hogwar
 
 Join the Junior Tri-Wizard Tournament and experience the thrill of competition, camaraderie, and magical challenges as you represent your school! 
 
+https://www.loom.com/share/c6ab55dd54a64b96bbeed5d5219be8d4
 ## Demo
 - Register as a student and complete a user profile with your favorite subjects and a short bio.
 ![](register_user_profile.gif)
