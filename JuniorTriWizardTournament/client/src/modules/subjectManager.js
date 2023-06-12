@@ -1,6 +1,6 @@
 import { getToken } from "./authManager";
 
-const baseUrl = "/api/subject";
+const baseUrl = "https://localhost:5001/api/subject";
 
 export const getAllSubjects = () => {
     return getToken().then(token => {

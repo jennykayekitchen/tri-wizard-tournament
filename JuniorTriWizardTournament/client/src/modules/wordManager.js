@@ -1,6 +1,6 @@
 import { getToken } from "./authManager"
 
-const baseUrl = "/api/Word"
+const baseUrl = "https://localhost:5001/api/Word"
 
 export const getAllWords = () => {
     return getToken().then(token => {

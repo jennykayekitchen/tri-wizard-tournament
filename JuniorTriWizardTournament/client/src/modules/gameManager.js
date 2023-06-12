@@ -1,6 +1,6 @@
 import { getToken } from "./authManager";
 
-const baseUrl = "/api/game";
+const baseUrl = "https://localhost:5001/api/game";
 
 export const getTotalPointsByUserId = (id) => {
     return getToken().then(token => {

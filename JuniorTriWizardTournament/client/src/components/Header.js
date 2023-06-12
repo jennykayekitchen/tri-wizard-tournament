@@ -29,11 +29,11 @@ export default function Header({ isLoggedIn }) {
                       Play Word Game
                     </a>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link" href="/tictactoe">
                       Play TicTacToe Game
                     </a>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <a className="nav-link" href="/standings">
                       Current Standings
