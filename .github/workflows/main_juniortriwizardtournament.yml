@@ -28,8 +28,8 @@ jobs
           app_location: "/" # App source code path
           api_location: "api" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
-        env: # Define environment variables here
-          REACT_APP_API_KEY: AIzaSyA6a9wpDNtpFga-Xrp4pcWqjvCqw2uyhMo
+        env: # Define environment variables her
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 
   deploy:
     runs-on: windows-latest
