@@ -1,6 +1,6 @@
 import { getToken } from "./authManager";
 
-const apiUrl = "/api/school";
+const apiUrl = "https://localhost:5001/api/school";
 
 export const getAllSchools = () => {
   return getToken().then((token) => {
