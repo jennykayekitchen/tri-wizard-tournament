@@ -32,6 +32,12 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Install Azure CLI
+        uses: azure/CLI@v1
+        with:
+          version: 'latest'
+      - name: Azure CLI Login
+        run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
