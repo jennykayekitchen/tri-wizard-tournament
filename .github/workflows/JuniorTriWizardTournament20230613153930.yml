@@ -10,40 +10,24 @@ env:
   DOTNET_CORE_VERSION: 5.0.x
   WORKING_DIRECTORY: JuniorTriWizardTournament
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v1
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
-      - name: Restore dependencies
-        run: dotnet restore ${{ env.WORKING_DIRECTORY }}
-      - name: Build
-        run: dotnet build ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-restore
-      - name: Publish
-        run: dotnet publish ${{ env.WORKING_DIRECTORY }} --configuration ${{ env.CONFIGURATION }} --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Install Azure CLI
-        uses: azure/CLI@v1
-        with:
-          version: 'latest'
-      - name: Azure CLI Login
-        run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-      - name: Deploy to Azure WebApp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.JuniorTriWizardTournament20230613153930_5059 }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_GROUND_0B14B7E10 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          app_location: "/" # Your app source code path!!!
+          api_location: "api" # Api source code path - optional
+          output_location: "build" # Built app content directory - optional
+        env: # Define environment variables here
         env: # Define environment variables here
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
   deploy:
