@@ -32,7 +32,7 @@ jobs:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
   deploy:
     runs-on: windows-latest
-    needs: build
+    needs: build_and_deploy_job
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
