@@ -39,6 +39,10 @@ jobs:
     runs-on: windows-latest
     needs: build_and_deploy_job
     steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
@@ -50,4 +54,5 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.JuniorTriWizardTournament20230613153930_5059 }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
 
