@@ -39,6 +39,10 @@ jobs:
     runs-on: windows-latest
     needs: build_and_deploy_job
     steps:
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az version
       - name: Azure Login
         uses: azure/login@v1
         with:
