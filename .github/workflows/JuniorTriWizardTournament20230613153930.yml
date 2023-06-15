@@ -2,10 +2,10 @@ name: Build and deploy .NET Core application to Web App JuniorTriWizardTournamen
 on:
   push:
     branches:
-    - main
+      - main
 env:
   AZURE_WEBAPP_NAME: JuniorTriWizardTournament20230613153930
-  AZURE_WEBAPP_PACKAGE_PATH: client/build
+  AZURE_WEBAPP_PACKAGE_PATH: JuniorTriWizardTournament/client/build
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 5.0.x
   WORKING_DIRECTORY: JuniorTriWizardTournament
@@ -39,14 +39,15 @@ jobs:
     runs-on: windows-latest
     needs: build_and_deploy_job
     steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v3
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    - name: Deploy to Azure WebApp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.JuniorTriWizardTournament20230613153930_5059 }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: webapp
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Deploy to Azure WebApp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.JuniorTriWizardTournament20230613153930_5059 }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
